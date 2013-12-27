@@ -18,8 +18,8 @@ Write a config file (or use config options?)
 
 Why Webster's?
 --------------
-Noah Webster's didn't invent the data dictionary, but he did invent the modern
-dictionary?
+Noah Webster's didn't invent the data dictionary, but he did write the first 
+dictionary of American English.
 
 TODO:
   write generators
