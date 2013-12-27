@@ -22,5 +22,5 @@ Noah Webster's didn't invent the data dictionary, but he did write the first
 dictionary of American English.
 
 TODO:
-  write generators
-  actually use the thing
+  - write generators
+  - actually use the thing
