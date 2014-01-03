@@ -6,10 +6,10 @@ module Websters
     railtie_name :websters
 
     generators do
-      require "./lib/generators/data_dictionary_model_generator"
-      require "./lib/generators/data_dictionary_model/data_dictionary_model_generator"
+      require_relative "../generators/websters/data_dictionary_model_generator"
+      # require "./lib/generators/websters/data_dictionary_model_generator"
+      # require "./lib/generators/websters/data_dictionary_model/data_dictionary_model_generator"
     end
-
 
     # rake_tasks do
     #   load "tasks/harvester.rake"

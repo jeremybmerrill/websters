@@ -15,16 +15,16 @@ DataDictionaryField.
 
 Is Webster's Done or Usable At All?
 -----------------------------------
-lol. no. maybe later.
+Umm. Not really. Soon, hopefully.
 
 How do I use Webster's?
 -----------------------
 
 Write a config file (or use config options?)
 
-`rails g data_dictionary_model StopAndFrisk lib/data/data_dictionary.tsv`
+`rails g websters:data_dictionary_model TrainStation lib/data/data_dictionary.tsv`
 `rake db:migrate`
-`rake stop_and_frisk:import lib/data/dataset.csv`
+`rake train_station:import[lib/data/dataset.csv]`
 
 Why Webster's?
 --------------

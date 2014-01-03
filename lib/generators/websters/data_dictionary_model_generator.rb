@@ -4,7 +4,6 @@ require "websters"
 require "csv"
 
 module Websters
-
   class DataDictionaryModelGenerator < ActiveRecord::Generators::Base
     desc "TK TK TK"
     argument :name, :type => :string, :banner => "camelcased name of records described by the data dictionary e.g. CodeViolation", :required => true
@@ -44,7 +43,7 @@ module Websters
       def get_headers
         #TODO: there should be a bare-bones default (e.g. column name first, description second, everything is a string)
         # but that should be overridden by either a config file or an argument
-        [:column_name, :attribute_name, :definition, :display_name].map(&:to_s)
+        [:column_name, :description, :values].map(&:to_s)
       end
 
       def read_csv!
@@ -57,17 +56,18 @@ module Websters
                 :col_sep => ",", 
                 :header_converters => :symbol).
           each_with_index do |row, index|
-            next if index == 1
             # Table_Name  Column_Name Attribute_Name  Definition  Column_Datatype Display_Name
             unless row[:column_name].empty?
               # a config file will be needed for a really generic processor
               # will tell us the headers, (converted to an array and passed to CSV.new )
               f = {}
-              f[:col_name] = row[:column_name].gsub(/[^A-Za-z0-9]/, '').underscore
-              f[:attribute_name] = row[:attribute_name]
-              f[:definition] = row[:definition]
+
+              # a sanitized column name used in the database.
+              f[:col_name] = row[:column_name].gsub(ILLEGAL_CHARACTERS, '') #defined in lib/websters.rb
+              f[:attribute_name] = row[:column_name] #raw name in the data dictionary
+              f[:definition] = row[:description].to_s + "\n" + row[:values].to_s
               f[:display_name] = row[:display_name]
-              f[:datatype] = f[:col_name].include?("*") ? "string" : "integer"
+              f[:datatype] = row[:column_name].include?("*") ? "string" : "integer"
               f[:source_model] = name
               @fields << f
             end
